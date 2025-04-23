@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from "../interfaces/user";
+import { AuthService } from '../services/authentication/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class LoginPage implements OnInit {
+  user: IUser = {
+    username: '',
+    password: '',
+    role: 'user'
+  }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+  }
+
+  doLogin() {
+
   }
 
 }
