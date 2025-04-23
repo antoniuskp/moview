@@ -5,7 +5,7 @@ import { guestGuard } from "./guards/guest.guard";
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -14,23 +14,26 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
     canActivate: [guestGuard]
   },
   {
     path: 'registration',
-    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule),
+    loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationPageModule),
     canActivate: [guestGuard]
   },
   {
     path: 'movie-detail/:index',
-    loadChildren: () => import('./movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
+    loadChildren: () => import('./movie-detail/movie-detail.module').then(m => m.MovieDetailPageModule)
   },
   {
     path: 'rate-movie/:index',
-    loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule)
+    loadChildren: () => import('./rate-movie/rate-movie.module').then(m => m.RateMoviePageModule)
+  },
+  {
+    path: 'search-movie',
+    loadChildren: () => import('./search-movie/search-movie.module').then(m => m.SearchMoviePageModule)
   }
-
 ];
 
 @NgModule({

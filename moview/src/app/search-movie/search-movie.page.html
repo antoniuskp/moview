@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title> 🔍 Pencarian Film</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="searchMovies()">
+    <ion-item>
+      <ion-label position="floating">Judul</ion-label>
+      <ion-input [(ngModel)]="searchCriteria.title" name="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Genre</ion-label>
+      <ion-input [(ngModel)]="searchCriteria.genre" name="genre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Pemeran</ion-label>
+      <ion-input [(ngModel)]="searchCriteria.cast" name="cast"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">Cari Film</ion-button>
+  </form>
+
+  <ion-grid *ngIf="movies.length > 0">
+    <ion-row>
+      <ion-col size="6" *ngFor="let movie of movies let i = index">
+        <ion-card>
+          <ion-img [src]="movie.poster" alt="Poster {{ movie.judul }}"></ion-img>
+
+          <ion-card-header>
+            <ion-card-title>{{ movie.judul }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="button-container">
+              <ion-button color="secondary" size="small" [routerLink]="['/movie-detail', i]">
+                Detail
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text color="medium" *ngIf="movies.length === 0">
+    <p class="ion-text-center">Tidak ada film ditemukan.</p>
+  </ion-text>
+</ion-content>

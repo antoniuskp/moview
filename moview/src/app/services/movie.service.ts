@@ -236,4 +236,18 @@ export class MovieService {
     }
     movie.reviews.push(review);
   }
+
+  getAllMovies() {
+    return this.movies;
+  }
+  
+  searchMovies(keyword: string): any[] {
+    const lowerKeyword = keyword.toLowerCase();
+    return this.movies.filter(movie =>
+      movie.judul.toLowerCase().includes(lowerKeyword) ||
+      movie.genre.toLowerCase().includes(lowerKeyword) ||
+      movie.actors?.some(actor => actor.name.toLowerCase().includes(lowerKeyword))
+    );
+  }
+  
 }

@@ -52,14 +52,14 @@
             <ion-item *ngFor="let review of movie.reviews" class="custom-ion-item">
               <ion-label>
                 <strong>{{ review.username }} <app-star-rating [rating]="review.rating"></app-star-rating>
-                </strong><br />{{ review.review }}
-                <br />
+                  <ion-card-subtitle>{{review.date | date: 'longDate'}}</ion-card-subtitle>
+                </strong>{{ review.review }} 
               </ion-label>
             </ion-item>
           </ion-list>
         </div>
-        <p>{{isLoggedIn}}</p>
-        <ion-button *ngIf="isLoggedIn" expand="block" color="secondary" [routerLink]="['/rate-movie', index]">
+        <!-- <p>{{isLoggedIn}}</p> -->
+        <ion-button *ngIf="isLoggedIn" expand="block" color="secondary" [routerLink]="['/rate-movie', index]"> 
         <!-- <ion-button expand="block" color="warning" [routerLink]="['/rate-movie', index]"> -->
           Beri Rating & Review
         </ion-button>
