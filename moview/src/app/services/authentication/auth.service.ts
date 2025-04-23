@@ -45,7 +45,7 @@ let users: IUser[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
 
   constructor(private router: Router) {  }
 
