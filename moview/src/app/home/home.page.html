@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,6 +7,20 @@
       <ion-button fill="outline" color="danger" *ngIf="!isAuthenticated()" (click)="goLoginPage()">
         Login
       </ion-button>
+      <div *ngIf="isAuthenticated()" style="display: flex; align-items: center">
+        <ion-chip color="success" (click)="toggleLogout()">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" [src]="getUser()?.photo" />
+          </ion-avatar>
+          <ion-label id="lblUsername" color="success">{{ getUser()?.username }}</ion-label>
+        </ion-chip>
+
+        <div *ngIf="showLogout" [@fadeInOut]>
+          <ion-button color="danger" (click)="logout()">
+            Logout
+          </ion-button>
+        </div>
+      </div>
     </ion-buttons>
     <ion-title>
       MOVIEW

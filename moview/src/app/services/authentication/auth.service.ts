@@ -117,4 +117,11 @@ export class AuthService {
     }
   }
 
+  logout() {
+    localStorage.removeItem(USER);
+    this.router.navigate(['/login'], {
+      replaceUrl: true
+    })
+  }
+
 }
