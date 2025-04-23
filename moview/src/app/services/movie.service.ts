@@ -236,4 +236,16 @@ export class MovieService {
     }
     movie.reviews.push(review);
   }
+
+  addMovie(p_poster: string, 
+    p_judul:string, p_genre:string, 
+    p_tanggal:Date, p_sutradara:string, 
+    p_sinopsis:string){
+    this.movies.push({
+      poster: p_poster, judul:p_judul, 
+      genre:p_genre, tanggalRilis: p_tanggal, 
+      sutradara: p_sutradara, sinopsis:p_sinopsis, 
+      actors:[], reviews:[]
+    })
+  }
 }
