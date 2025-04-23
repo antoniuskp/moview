@@ -36,3 +36,13 @@ ion-input {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+.full-chip {
+  width: 100%;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-inline: 0;
+}

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from "../services/authentication/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) { }
 
+  isAuthenticated() {
+    return this.authService.user() != null;
+  }
+
+  goLoginPage() {
+    return this.router.navigate(['login']);
+  }
 }

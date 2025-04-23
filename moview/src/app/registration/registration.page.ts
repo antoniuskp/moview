@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from "../interfaces/user";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -14,9 +15,21 @@ export class RegistrationPage implements OnInit {
     role: 'user'
   }
 
-  constructor() { }
+  showPassword = false;
+  errorMessage: string | null = null;
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.data.subscribe(params => {
+      this.errorMessage = params['error'] || null;
+    })
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
 }

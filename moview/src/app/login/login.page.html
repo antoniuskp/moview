@@ -7,32 +7,50 @@
       </ion-card-header>
 
       <ion-card-content>
+        <div
+          style="margin-bottom: 12px;"
+          *ngIf="errorMessage"
+          [@fadeInOut]
+        >
+          <ion-chip color="danger" class="full-chip">User not found</ion-chip>
+        </div>
         <ion-item>
           <ion-input
             label="Username"
-            labelPlacement="stacked"
+            labelPlacement="floating"
             placeholder="your username"
+            fill="outline"
             [(ngModel)]="user.username"
           ></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-input
-            label="Password"
-            labelPlacement="stacked"
-            placeholder="******"
-            type="password"
-            [(ngModel)]="user.password"
-          >
-            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-          </ion-input>
-        </ion-item>
+        <div style="margin-top: 12px;">
+          <ion-item>
+            <ion-input
+              label="Password"
+              labelPlacement="floating"
+              placeholder="******"
+              type="password"
+              fill="outline"
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="user.password"
+            >
+            </ion-input>
+            <ion-icon
+              [name]="showPassword ? 'eye-off' : 'eye'"
+              slot="end"
+              class="password-toggle-icon"
+              (click)="togglePassword()"
+            ></ion-icon>
+          </ion-item>
+        </div>
 
         <ion-button
           fill="solid"
           expand="full"
           id="btnLogin"
           color="dark"
+          (click)="doLogin()"
         >
           Login
         </ion-button>
