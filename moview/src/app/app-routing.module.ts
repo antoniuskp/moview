@@ -28,12 +28,9 @@ const routes: Routes = [
   },
   {
     path: 'rate-movie/:index',
-    loadChildren: () => import('./rate-movie/rate-movie.module').then(m => m.RateMoviePageModule)
-  },
-  {
-    path: 'search-movie',
-    loadChildren: () => import('./search-movie/search-movie.module').then(m => m.SearchMoviePageModule)
+    loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule)
   }
+
 ];
 
 @NgModule({

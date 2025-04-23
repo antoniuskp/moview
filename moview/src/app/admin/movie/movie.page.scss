@@ -1,0 +1,19 @@
+.grid-table {
+    ion-row {
+      border-bottom: 1px solid #ccc;
+  
+      ion-col {
+        border-right: 1px solid #ccc;
+        padding: 12px;
+      }
+  
+      ion-col:last-child {
+        border-right: none; // Hilangkan garis di kolom terakhir
+      }
+    }
+  
+    .header-row {
+      background-color: beige;
+      font-weight: bold;
+    }
+  }
