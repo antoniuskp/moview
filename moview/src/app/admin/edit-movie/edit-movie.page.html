@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>editMovie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">editMovie</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngIf="movie">
+    <img [src]="edit_poster" width="400" />
+    <ion-card-header>
+      <ion-card-title>{{ edit_judul }}</ion-card-title>
+      <ion-card-subtitle>{{ edit_genre }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Poster URL</ion-label>
+        <ion-input [(ngModel)]="edit_poster"></ion-input>
+        <ion-img *ngIf="edit_poster" [src]="edit_poster" style="width: 400px;"></ion-img>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Judul</ion-label>
+        <ion-input [(ngModel)]="edit_judul"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Genre</ion-label>
+        <ion-input [(ngModel)]="edit_genre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Tanggal Rilis</ion-label>
+        <ion-datetime [(ngModel)]="edit_tanggal"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Sutradara</ion-label>
+        <ion-input [(ngModel)]="edit_sutradara"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Sinopsis</ion-label>
+        <ion-textarea [(ngModel)]="edit_sinopsis"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Actor Name</ion-label>
+        <ion-input [(ngModel)]="edit_actor_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Actor Role</ion-label>
+        <ion-input [(ngModel)]="edit_actor_role"></ion-input>
+      </ion-item>
+      <ion-button expand="full" color="primary" (click)="addActor()">Add Actor</ion-button>
+      <ion-list>
+        <ion-item *ngFor="let actor of edit_actors; let i = index">
+          <ion-label>{{ actor.name }} as {{ actor.role }}</ion-label>
+          <ion-button (click)="removeActor(i)" color="danger" fill="clear">
+            Hapus
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button color="primary" expand="full" (click)="editmovie()">Simpan Perubahan</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -236,4 +236,38 @@ export class MovieService {
     }
     movie.reviews.push(review);
   }
+
+  addMovie(p_poster: string, 
+    p_judul:string, p_genre:string, 
+    p_tanggal:Date, p_sutradara:string, 
+    p_sinopsis:string, p_actors: Array<{ name: string, role: string }>){
+    this.movies.push({
+      poster: p_poster, judul:p_judul, 
+      genre:p_genre, tanggalRilis: p_tanggal, 
+      sutradara: p_sutradara, sinopsis:p_sinopsis, 
+      actors:p_actors, reviews:[]
+    })
+  }
+  
+  editMovie(index: number, p_poster: 
+    string, p_judul: string, p_genre: 
+    string, p_tanggal: Date, p_sutradara: string, 
+    p_sinopsis: string, p_actors: Array<{ name: string, role: string }>) {
+    const movie = this.movies[index];
+    if (movie) {
+      movie.poster = p_poster;
+      movie.judul = p_judul;
+      movie.genre = p_genre;
+      movie.tanggalRilis = p_tanggal;
+      movie.sutradara = p_sutradara;
+      movie.sinopsis = p_sinopsis;
+      movie.actors = p_actors;
+    }
+  }
+
+  deleteMovie(index: number) {
+    if (index > -1 && index < this.movies.length) {
+      this.movies.splice(index, 1);
+    }
+  }
 }

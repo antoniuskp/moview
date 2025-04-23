@@ -36,7 +36,7 @@
           <ion-col><strong>Sinopsis</strong></ion-col>
           <ion-col><strong>Pemeran</strong></ion-col>
           <ion-col><strong>Ulasan</strong></ion-col>
-          <ion-col><strong>Aksi</strong></ion-col> <!-- Tambahan kolom aksi -->
+          <ion-col><strong>Aksi</strong></ion-col>
         </ion-row>
   
         <ion-row *ngFor="let movie of movies; let i = index">
@@ -66,8 +66,8 @@
           </ion-col>
   
           <ion-col>
-            <ion-button color="warning" size="small">Edit</ion-button>
-            <ion-button color="danger" size="small">Hapus</ion-button>
+          <ion-button color="warning" size="small" [routerLink]="['/admin/edit-movie', i]">Edit</ion-button>
+          <ion-button color="danger" size="small" (click)="deleteMovie(i)">Hapus</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -80,7 +80,7 @@
         <ion-item 
           button 
           *ngFor="let movie of movies; let i = index" 
-          (click)="openModal(movie)">
+          (click)="openModal(movie, i)">
           <ion-avatar slot="start">
             <img [src]="movie.poster"/>
           </ion-avatar>
@@ -126,15 +126,15 @@
               </ion-item>
             </ion-list>
           </div>
-          <ion-button color="warning" size="small">Edit</ion-button>
-          <ion-button color="danger" size="small">Hapus</ion-button>
+          <ion-button color="warning" size="small" [routerLink]="['/admin/edit-movie', selectedIndex]">Edit</ion-button>
+          <ion-button color="danger" size="small" (click)="deleteMovie(selectedIndex)">Hapus</ion-button>
         </ion-content>
       </ng-template>
     </ion-modal>
   </ion-content>
   
   <div *ngIf="jenistampilan == 'card'">
-    <ion-card *ngFor="let movie of movies">
+    <ion-card *ngFor="let movie of movies; let i = index">
       <img [src]="movie.poster" width='400'/>
       <ion-card-header>
         <ion-card-title>{{movie.judul}}</ion-card-title>
@@ -166,8 +166,8 @@
             </ion-item>
           </ion-list>
         </div>
-        <ion-button color="warning" size="small">Edit</ion-button>
-        <ion-button color="danger" size="small">Hapus</ion-button>
+        <ion-button color="warning" size="small" [routerLink]="['/admin/edit-movie', i]">Edit</ion-button>
+        <ion-button color="danger" size="small" (click)="deleteMovie(i)">Hapus</ion-button>
       </ion-card-content>
     </ion-card>
   </div>

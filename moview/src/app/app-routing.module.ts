@@ -29,7 +29,19 @@ const routes: Routes = [
   {
     path: 'rate-movie/:index',
     loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule)
-  }
+  },
+  {
+    path: 'admin/movie',
+    loadChildren: () => import('./admin/movie/movie.module').then( m => m.MoviePageModule)
+  },
+  {
+    path: 'admin/add-movie',
+    loadChildren: () => import('./admin/add-movie/add-movie.module').then( m => m.AddMoviePageModule)
+  },
+  {
+    path: 'admin/edit-movie/:index',
+    loadChildren: () => import('./admin/edit-movie/edit-movie.module').then( m => m.EditMoviePageModule)
+  },
 
 ];
 

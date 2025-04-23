@@ -13,29 +13,25 @@ export class MoviePage implements OnInit {
   jenistampilan = "table"
   isModalOpen = false;
   selectedMovie: IMoview | null = null;
+  selectedIndex:number=0;
 
-  openModal(movie: IMoview) {
+  openModal(movie: IMoview, i:number) {
     this.selectedMovie = movie;
+    this.selectedIndex = i;
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
     this.selectedMovie = null;
+    this.selectedIndex = 0;
   }
-
-
-  // editMovie(index: number) {
-  //   const movieToEdit = this.movies[index];
-  //   console.log('Edit movie:', movieToEdit);
-  // }
   
-  // deleteMovie(index: number) {
-  //   if (confirm('Yakin ingin menghapus film ini?')) {
-  //     this.movies.splice(index, 1);
-  //   }
-  // }
-
+  deleteMovie(index: number) {
+    if (confirm('Apakah Anda yakin ingin menghapus film ini?')) {
+      this.movieService.movies.splice(index, 1); 
+    }
+  }
 
   movies: IMoview[] = [];
   index: number = 0;
