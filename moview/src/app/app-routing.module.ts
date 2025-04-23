@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { guestGuard } from "./guards/guest.guard";
 
 const routes: Routes = [
   {
@@ -13,11 +14,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    canActivate: [guestGuard]
   },
   {
     path: 'registration',
-    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
+    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule),
+    canActivate: [guestGuard]
   },
   {
     path: 'movie-detail/:index',
@@ -32,7 +35,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload' })
   ],
   exports: [RouterModule]
 })

@@ -41,6 +41,8 @@ let users: IUser[] = [
   },
 ]
 
+const USER = "user";
+
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +53,7 @@ export class AuthService {
 
   user(): IUser | null {
     // Get JSON from local storage
-    const userJSON = localStorage.getItem("user");
+    const userJSON = localStorage.getItem(USER);
 
     if (!userJSON) return null;
 
@@ -87,26 +89,39 @@ export class AuthService {
     // Kali user tidak ada
     if (!checkUser) {
       // Redirect ke login page dan kirim pesan
-      this.router.navigate(['/login'], {
-        queryParams: { error: "User not found"},
-        replaceUrl: true  // Buat hapus stack sebelumnya
-      });
+      console.log("Redirecting to /login because user was not found");
+      try {
+        this.router.navigate(['/login'], {
+          queryParams: { error: "User not found" },
+          replaceUrl: true,
+        });
+      } catch (e) {
+        console.log(e);
+      }
       return;
     }
 
+    const userJSON = JSON.stringify(checkUser);
+    localStorage.setItem(USER, userJSON);
+
     // Kalo ada, check role-nya
-    switch (user.role) {
+    switch (checkUser.role) {
       case "admin":
-        this.router.navigate(['/admin/movie'], {
+        return this.router.navigate(['/admin/movie'], {
           replaceUrl: true
         });
-        return;
       default:
-        this.router.navigate(['/home'], {
+        return this.router.navigate(['/home'], {
           replaceUrl: true
         });
-        return;
     }
+  }
+
+  logout() {
+    localStorage.removeItem(USER);
+    this.router.navigate(['/login'], {
+      replaceUrl: true
+    })
   }
 
 }
