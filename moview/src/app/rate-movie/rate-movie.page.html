@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Beri Rating & Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="movie">
+    <ion-card class="movie-card">
+      <img [src]="movie.poster" alt="Poster Film" class="center-poster" />
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">{{ movie.judul }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <form (ngSubmit)="submitReview()" #reviewForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Rating (1-5)</ion-label>
+      <ion-input type="number" [(ngModel)]="rating" name="rating" [min]="1" [max]="5" [step]="1" required></ion-input>
+      <app-star-rating [rating]="rating"></app-star-rating>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Review</ion-label>
+      <ion-textarea [(ngModel)]="review" name="review" required [cols]="30" [rows]="5"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" id="btnsubmit" [disabled]="!reviewForm.valid">
+      Kirim
+    </ion-button>
+    <ion-alert trigger="btnsubmit" header="Add Review" message="Rating successfully stored"
+      [buttons]="alertButtons"></ion-alert>
+  </form>
+</ion-content>

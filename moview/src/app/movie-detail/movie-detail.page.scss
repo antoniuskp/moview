@@ -1,0 +1,11 @@
+.custom-ion-item {
+  --padding-start: 0px; // hilangkan padding kiri item list
+  --inner-padding-start: 0px; // khusus isi dalam item
+}
+
+.center-poster {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  border-radius: 10px;
+}

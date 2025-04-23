@@ -19,6 +19,15 @@ const routes: Routes = [
     path: 'registration',
     loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
   },
+  {
+    path: 'movie-detail/:index',
+    loadChildren: () => import('./movie-detail/movie-detail.module').then( m => m.MovieDetailPageModule)
+  },
+  {
+    path: 'rate-movie/:index',
+    loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule)
+  }
+
 ];
 
 @NgModule({

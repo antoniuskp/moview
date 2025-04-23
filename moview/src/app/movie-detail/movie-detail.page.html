@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>🎬 Movie Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="movie">
+    <ion-card class="movie-card">
+      <img [src]="movie.poster" alt="Poster Film"  class="center-poster" />
+
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">{{ movie.judul }}</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">
+          <ion-chip color="secondary">
+            <ion-label>Genre: {{ movie.genre }}</ion-label>
+          </ion-chip>
+        </ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-center">
+          <ion-icon name="calendar-outline"></ion-icon>
+          {{ movie.tanggalRilis | date: 'longDate' }}
+        </ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-center">
+          <ion-icon name="person-outline"></ion-icon>
+          Sutradara: {{ movie.sutradara }}
+        </ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-center">
+          <ion-badge color="secondary">
+            ⭐ Rata-rata Rating: {{ getAverageRating(movie) | number:'1.1-1' }}
+          </ion-badge>
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-card-title>Sinopsis</ion-card-title>
+        <ion-card-subtitle>{{ movie.sinopsis }}</ion-card-subtitle>
+        <div class="ion-margin-bottom"><br />
+          <ion-card-title>Aktor</ion-card-title>
+          <ion-list lines="none">
+            <ion-item *ngFor="let actor of movie.actors" class="custom-ion-item">
+              <ion-label>
+                {{ actor.name }}
+                <small><i>as {{ actor.role }}</i></small>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div>
+          <h3 class="ion-margin-top"> <ion-card-title>Rating & Review </ion-card-title></h3>
+          <ion-list lines="inset">
+            <ion-item *ngFor="let review of movie.reviews" class="custom-ion-item">
+              <ion-label>
+                <strong>{{ review.username }} <app-star-rating [rating]="review.rating"></app-star-rating>
+                </strong><br />{{ review.review }}
+                <br />
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+        <p>{{isLoggedIn}}</p>
+        <ion-button *ngIf="isLoggedIn" expand="block" color="secondary" [routerLink]="['/rate-movie', index]">
+        <!-- <ion-button expand="block" color="warning" [routerLink]="['/rate-movie', index]"> -->
+          Beri Rating & Review
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -8,4 +8,6 @@ export interface IMoview {
     tanggalRilis: Date,
     reviews: IReview[],
     actors: IActor[],
+    sutradara: string,
+    sinopsis: string
 }
