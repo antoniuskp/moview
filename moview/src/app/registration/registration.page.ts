@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from "../interfaces/user";
 import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../services/authentication/auth.service";
 
 @Component({
   selector: 'app-registration',
@@ -19,17 +20,25 @@ export class RegistrationPage implements OnInit {
   errorMessage: string | null = null;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
-    this.route.data.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.errorMessage = params['error'] || null;
     })
   }
 
   togglePassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  registration() {
+    if (this.user.username != "" && this.user.password != "") {
+      return this.authService.register(this.user);
+    }
+    return;
   }
 
 }

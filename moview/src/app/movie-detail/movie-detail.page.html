@@ -1,6 +1,35 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>🎬 Movie Details</ion-title>
+<!--<ion-header>-->
+<!--  <ion-toolbar color="primary">-->
+<!--    <ion-title>🎬 Movie Details</ion-title>-->
+<!--  </ion-toolbar>-->
+<!--</ion-header>-->
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button fill="outline" color="danger" *ngIf="!isAuthenticated()" (click)="goLoginPage()">
+        Login
+      </ion-button>
+      <div *ngIf="isAuthenticated()" style="display: flex; align-items: center">
+        <ion-chip color="success" (click)="toggleLogout()">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" [src]="getUser()?.photo" />
+          </ion-avatar>
+          <ion-label id="lblUsername" color="success">{{ getUser()?.username }}</ion-label>
+        </ion-chip>
+
+        <div *ngIf="showLogout" [@fadeInOut]>
+          <ion-button color="danger" (click)="logout()">
+            Logout
+          </ion-button>
+        </div>
+      </div>
+    </ion-buttons>
+    <ion-title>
+      DETAIL MOVIE
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -53,13 +82,13 @@
               <ion-label>
                 <strong>{{ review.username }} <app-star-rating [rating]="review.rating"></app-star-rating>
                   <ion-card-subtitle>{{review.date | date: 'longDate'}}</ion-card-subtitle>
-                </strong>{{ review.review }} 
+                </strong>{{ review.review }}
               </ion-label>
             </ion-item>
           </ion-list>
         </div>
         <!-- <p>{{isLoggedIn}}</p> -->
-        <ion-button *ngIf="isLoggedIn" expand="block" color="secondary" [routerLink]="['/rate-movie', index]"> 
+        <ion-button *ngIf="isLoggedIn" expand="block" color="secondary" [routerLink]="['/rate-movie', index]">
         <!-- <ion-button expand="block" color="warning" [routerLink]="['/rate-movie', index]"> -->
           Beri Rating & Review
         </ion-button>

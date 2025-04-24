@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, QueryList, ViewChildren} from '@angular/core';
 import { AuthService } from "../services/authentication/auth.service";
 import { Router } from "@angular/router";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {IMoview} from "../interfaces/movie";
+import {MovieService} from "../services/movie.service";
+
+import Swiper from 'swiper';
+import {IReview} from "../interfaces/review";
 
 @Component({
   selector: 'app-home',
@@ -22,7 +27,23 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 export class HomePage {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  movies: IMoview[] = []
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private movieService: MovieService,
+  ) { }
+
+  ngOnInit() {
+    this.movies = this.movieService.movies
+      .sort((a, b) => new Date(b.tanggalRilis).getTime() - new Date(a.tanggalRilis).getTime())
+      .slice(0, 10);
+  }
+
+  @ViewChildren('swiper')
+  swiperRefs!: QueryList<ElementRef>;
+  swiper!: Swiper;
 
   showLogout = false;
 
@@ -44,5 +65,15 @@ export class HomePage {
 
   goLoginPage() {
     return this.router.navigate(['login']);
+  }
+
+  getAverageRating(movie: IMoview): number {
+    const { reviews } = movie;
+    if (reviews.length === 0) return 0;
+
+    const totalRating = reviews
+      .reduce((sum, review) => sum + review.rating, 0);
+
+    return totalRating / reviews.length;
   }
 }

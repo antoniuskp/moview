@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { IMoview } from '../interfaces/movie';
-import { MovieService } from '../services/movie.service'; 
-import { AuthService } from '../services/authentication/auth.service'; 
+import { MovieService } from '../services/movie.service';
+import { AuthService } from '../services/authentication/auth.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -12,20 +12,47 @@ import { AuthService } from '../services/authentication/auth.service';
 })
 export class MovieDetailPage implements OnInit {
   movie: IMoview | undefined;
-  isLoggedIn: boolean = false;  
-  index: number = 0;  
+  isLoggedIn: boolean = false;
+  index: number = 0;
+  showLogout = false;
 
-  constructor(private route: ActivatedRoute, private movieService: MovieService, private authService: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService,
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.isLoggedIn = !!this.authService.user();
 
     this.route.params.subscribe(params => {
-      this.index = +params['index']; 
+      this.index = +params['index'];
       this.movie = this.movieService.movies[this.index];
       console.log('Movie:', this.movie);
     });
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  toggleLogout() {
+    this.showLogout = !this.showLogout;
+  }
+
+  isAuthenticated() {
+    return this.authService.user() != null;
+  }
+
+  getUser() {
+    return this.authService.user();
+  }
+
+  goLoginPage() {
+    return this.router.navigate(['login']);
+  }
+
 
   getAverageRating(movie: IMoview): number {
     if (!movie.reviews || movie.reviews.length === 0) {

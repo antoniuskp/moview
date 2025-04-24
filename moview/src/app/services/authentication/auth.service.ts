@@ -119,7 +119,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(USER);
-    this.router.navigate(['/login'], {
+    this.router.navigate(['/home'], {
       replaceUrl: true
     })
   }

@@ -6,7 +6,7 @@ import { IMoview } from '../interfaces/movie';
   providedIn: 'root'
 })
 export class MovieService {
-  movies = [
+  movies: IMoview[] = [
     {
       poster: 'https://m.media-amazon.com/images/I/71ImBV+WHYL._UF1000,1000_QL80_.jpg',
       judul: 'The Great Adventure',
@@ -237,21 +237,21 @@ export class MovieService {
     movie.reviews.push(review);
   }
 
-  addMovie(p_poster: string, 
-    p_judul:string, p_genre:string, 
-    p_tanggal:Date, p_sutradara:string, 
+  addMovie(p_poster: string,
+    p_judul:string, p_genre:string,
+    p_tanggal:Date, p_sutradara:string,
     p_sinopsis:string, p_actors: Array<{ name: string, role: string }>){
     this.movies.push({
-      poster: p_poster, judul:p_judul, 
-      genre:p_genre, tanggalRilis: p_tanggal, 
-      sutradara: p_sutradara, sinopsis:p_sinopsis, 
+      poster: p_poster, judul:p_judul,
+      genre:p_genre, tanggalRilis: p_tanggal,
+      sutradara: p_sutradara, sinopsis:p_sinopsis,
       actors:p_actors, reviews:[]
     })
   }
-  
-  editMovie(index: number, p_poster: 
-    string, p_judul: string, p_genre: 
-    string, p_tanggal: Date, p_sutradara: string, 
+
+  editMovie(index: number, p_poster:
+    string, p_judul: string, p_genre:
+    string, p_tanggal: Date, p_sutradara: string,
     p_sinopsis: string, p_actors: Array<{ name: string, role: string }>) {
     const movie = this.movies[index];
     if (movie) {

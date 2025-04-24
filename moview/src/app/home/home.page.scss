@@ -29,3 +29,64 @@
 #lblUsername {
   text-transform: capitalize;
 }
+
+.movie-swiper {
+  height: 100%;
+  border-radius: 0.75rem;
+}
+
+#movie-slide {
+  height: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.carousel-slide {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 0.75rem;
+}
+
+.overlay {
+  width: 100%;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+  color: white;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sinopsis {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.img-poster {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.tgl-rilis {
+  font-size: 0.8rem;
+  margin-inline: 0;
+}
+
+.rating {
+  text-align: end;
+}
+
+@media screen and (min-width: 1200px) {
+  .img-poster {
+    height: 400px;
+  }
+}

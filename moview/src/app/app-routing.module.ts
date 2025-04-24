@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { guestGuard } from "./guards/guest.guard";
+import {roleGuard} from "./guards/role.guard";
 
 const routes: Routes = [
   {
@@ -24,24 +25,40 @@ const routes: Routes = [
   },
   {
     path: 'movie-detail/:index',
-    loadChildren: () => import('./movie-detail/movie-detail.module').then(m => m.MovieDetailPageModule)
+    loadChildren: () => import('./movie-detail/movie-detail.module').then(m => m.MovieDetailPageModule),
   },
   {
     path: 'rate-movie/:index',
-    loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule)
+    loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule),
   },
   {
     path: 'admin/movie',
-    loadChildren: () => import('./admin/movie/movie.module').then( m => m.MoviePageModule)
+    loadChildren: () => import('./admin/movie/movie.module').then( m => m.MoviePageModule),
+    canActivate: [roleGuard],
+    data: {
+      'expectedRole': 'admin'
+    },
   },
   {
     path: 'admin/add-movie',
-    loadChildren: () => import('./admin/add-movie/add-movie.module').then( m => m.AddMoviePageModule)
+    loadChildren: () => import('./admin/add-movie/add-movie.module').then( m => m.AddMoviePageModule),
+    canActivate: [roleGuard],
+    data: {
+      'expectedRole': 'admin'
+    },
   },
   {
     path: 'admin/edit-movie/:index',
-    loadChildren: () => import('./admin/edit-movie/edit-movie.module').then( m => m.EditMoviePageModule)
+    loadChildren: () => import('./admin/edit-movie/edit-movie.module').then( m => m.EditMoviePageModule),
+    canActivate: [roleGuard],
+    data: {
+      'expectedRole': 'admin'
+    },
   },
+  {
+    path: 'home/search',
+    loadChildren: () => import('./search-movie/search-movie.module').then( m => m.SearchMoviePageModule),
+  }
 
 ];
 

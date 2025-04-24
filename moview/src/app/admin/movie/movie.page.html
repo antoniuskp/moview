@@ -1,6 +1,35 @@
+<!--<ion-header [translucent]="true">-->
+<!--  <ion-toolbar>-->
+<!--    <ion-title>movie</ion-title>-->
+<!--  </ion-toolbar>-->
+<!--</ion-header>-->
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>movie</ion-title>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button fill="outline" color="danger" *ngIf="!isAuthenticated()" (click)="goLoginPage()">
+        Login
+      </ion-button>
+      <div *ngIf="isAuthenticated()" style="display: flex; align-items: center">
+        <ion-chip color="success" (click)="toggleLogout()">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" [src]="getUser()?.photo" />
+          </ion-avatar>
+          <ion-label id="lblUsername" color="success">{{ getUser()?.username }}</ion-label>
+        </ion-chip>
+
+        <div *ngIf="showLogout" [@fadeInOut]>
+          <ion-button color="danger" (click)="logout()">
+            Logout
+          </ion-button>
+        </div>
+      </div>
+    </ion-buttons>
+    <ion-title>
+      MOVIEW
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -38,7 +67,7 @@
           <ion-col><strong>Ulasan</strong></ion-col>
           <ion-col><strong>Aksi</strong></ion-col>
         </ion-row>
-  
+
         <ion-row *ngFor="let movie of movies; let i = index">
           <ion-col><img [src]="movie.poster" height="100" /></ion-col>
           <ion-col>{{ movie.judul }}</ion-col>
@@ -46,7 +75,7 @@
           <ion-col>{{ movie.tanggalRilis | date: 'longDate' }}</ion-col>
           <ion-col>{{ movie.sutradara }}</ion-col>
           <ion-col>{{ movie.sinopsis }}</ion-col>
-  
+
           <ion-col>
             <ul>
               <li *ngFor="let actor of movie.actors">
@@ -54,7 +83,7 @@
               </li>
             </ul>
           </ion-col>
-  
+
           <ion-col>
             <ul>
               <li *ngFor="let review of movie.reviews">
@@ -64,7 +93,7 @@
               </li>
             </ul>
           </ion-col>
-  
+
           <ion-col>
           <ion-button color="warning" size="small" [routerLink]="['/admin/edit-movie', i]">Edit</ion-button>
           <ion-button color="danger" size="small" (click)="deleteMovie(i)">Hapus</ion-button>
@@ -77,9 +106,9 @@
   <ion-content *ngIf="jenistampilan == 'list'">
     <ion-card>
       <ion-list>
-        <ion-item 
-          button 
-          *ngFor="let movie of movies; let i = index" 
+        <ion-item
+          button
+          *ngFor="let movie of movies; let i = index"
           (click)="openModal(movie, i)">
           <ion-avatar slot="start">
             <img [src]="movie.poster"/>
@@ -132,7 +161,7 @@
       </ng-template>
     </ion-modal>
   </ion-content>
-  
+
   <div *ngIf="jenistampilan == 'card'">
     <ion-card *ngFor="let movie of movies; let i = index">
       <img [src]="movie.poster" width='400'/>
