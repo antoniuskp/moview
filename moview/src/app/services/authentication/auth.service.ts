@@ -67,7 +67,7 @@ export class AuthService {
 
     // Kalo username udh ada
     if (checkUser) {
-      this.router.navigate(['/register'], {
+      this.router.navigate(['/registration'], {
         queryParams: { error: "Username already exists"},
         replaceUrl: true  // Buat hapus stack sebelumnya
       });
@@ -76,6 +76,8 @@ export class AuthService {
 
     // Tambahkan User
     users.push(user);
+
+    localStorage.setItem(USER, JSON.stringify(user));
 
     // Redirect ke home
     this.router.navigate(['/home'], {

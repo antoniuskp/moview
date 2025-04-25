@@ -49,13 +49,17 @@ export class LoginPage implements OnInit {
 
       setTimeout(() => {
         this.errorMessage = null;
-
-        this.router.navigate([], {
-          relativeTo: this.route,
-          queryParams: {},
-          replaceUrl: true,
-        });
       }, 3000);
+
+      // setTimeout(() => {
+      //   this.errorMessage = null;
+      //
+      //   this.router.navigate([], {
+      //     relativeTo: this.route,
+      //     queryParams: {},
+      //     replaceUrl: true,
+      //   });
+      // }, 3000);
     })
   }
 

@@ -12,7 +12,7 @@
           *ngIf="errorMessage"
           [@fadeInOut]
         >
-          <ion-chip color="danger" class="full-chip">User not found</ion-chip>
+          <ion-chip color="danger" class="full-chip">{{ errorMessage }}</ion-chip>
         </div>
         <ion-item>
           <ion-input

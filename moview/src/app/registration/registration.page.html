@@ -12,7 +12,7 @@
           *ngIf="errorMessage"
           [@fadeInOut]
         >
-          <ion-chip color="danger" class="full-chip">User not found</ion-chip>
+          <ion-chip color="danger" class="full-chip">{{ errorMessage }}</ion-chip>
         </div>
         <ion-item>
           <ion-input
@@ -64,7 +64,7 @@
           color="dark"
           (click)="registration()"
         >
-          Login
+          Register
         </ion-button>
 
         <ion-card-subtitle id="linkLogin">Already have an account? <a [routerLink]="['/login']">Log in</a></ion-card-subtitle>
