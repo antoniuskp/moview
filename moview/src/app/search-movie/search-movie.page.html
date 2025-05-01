@@ -35,15 +35,17 @@
 
           <ion-card-header>
             <ion-card-title>{{ movie.judul }}</ion-card-title>
+            <ion-card-subtitle>{{ movie.genre }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ movie.pemeran }}</ion-card-subtitle>
+            <ion-card-subtitle>Aktor </ion-card-subtitle>
+            <ion-label class="custom-ion-item">
+              <small *ngFor="let actor of movie.actors; let last = last">
+                {{ actor.name }}<span *ngIf="!last">, </span>
+              </small>
+            </ion-label>
+
           </ion-card-header>
 
-          <ion-card-content>
-            <div class="button-container">
-              <ion-button color="secondary" size="small" [routerLink]="['/movie-detail', i]">
-                Detail
-              </ion-button>
-            </div>
-          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
