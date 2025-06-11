@@ -24,11 +24,11 @@ const routes: Routes = [
     canActivate: [guestGuard]
   },
   {
-    path: 'movie-detail/:index',
+    path: 'movie-detail/:id',
     loadChildren: () => import('./movie-detail/movie-detail.module').then(m => m.MovieDetailPageModule),
   },
   {
-    path: 'rate-movie/:index',
+    path: 'rate-movie/:id',
     loadChildren: () => import('./rate-movie/rate-movie.module').then( m => m.RateMoviePageModule),
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'admin/edit-movie/:index',
+    path: 'admin/edit-movie/:id',
     loadChildren: () => import('./admin/edit-movie/edit-movie.module').then( m => m.EditMoviePageModule),
     canActivate: [roleGuard],
     data: {

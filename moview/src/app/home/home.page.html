@@ -101,7 +101,7 @@
             </ion-card-subtitle>
             <ion-text>
               <ion-chip class="tgl-rilis" color="secondary">
-                {{ movie.tanggalRilis.toDateString() }}
+                {{ movie.tanggalRilis }}
               </ion-chip>
             </ion-text>
           </ion-card-header>
@@ -118,7 +118,7 @@
             <ion-button
               expand="block"
               fill="clear"
-              routerLink="/movie-detail/{{ i }}"
+              routerLink="/movie-detail/{{ movie.id }}"
             >
               Detail
             </ion-button>

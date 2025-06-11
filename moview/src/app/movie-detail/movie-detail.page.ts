@@ -11,9 +11,11 @@ import { AuthService } from '../services/authentication/auth.service';
   standalone:false
 })
 export class MovieDetailPage implements OnInit {
-  movie: IMoview | undefined;
+  // movie: IMoview | undefined;
+  movie:any={}
   isLoggedIn: boolean = false;
-  index: number = 0;
+  // index: number = 0;
+  id:number=0;
   showLogout = false;
 
   constructor(
@@ -27,9 +29,15 @@ export class MovieDetailPage implements OnInit {
     this.isLoggedIn = !!this.authService.user();
 
     this.route.params.subscribe(params => {
-      this.index = +params['index'];
-      this.movie = this.movieService.movies[this.index];
-      console.log('Movie:', this.movie);
+      // this.index = +params['index'];
+      // this.movie = this.movieService.movies[this.index];
+      // console.log('Movie:', this.movie);
+      this.id = params['id'];
+      this.movieService.detailMovie(this.id).subscribe(
+        (data) => {
+          this.movie = this.movieService.parseDetailMovie(data);
+        }
+      );
     });
   }
 

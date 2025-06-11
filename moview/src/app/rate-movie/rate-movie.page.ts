@@ -16,8 +16,10 @@ import { IUser } from '../interfaces/user';
 export class RateMoviePage implements OnInit {
   rating = 5;
   review = '';
-  index = 0;
-  movie: IMoview | undefined;
+  // index = 0;
+  // movie: IMoview | undefined;
+  id=0
+  movie:any={}
   alertButtons = ['OK'];
   currentUser: IUser | null = null;
   username: string = '';
@@ -26,9 +28,15 @@ export class RateMoviePage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.index = +params['index'];
-      this.movie = this.movieService.movies[this.index];
-      console.log(this.index);
+      // this.index = +params['index'];
+      // this.movie = this.movieService.movies[this.index];
+      // console.log(this.index);
+      this.id = params['id'];
+      this.movieService.detailMovie(this.id).subscribe(
+        (data) => {
+          this.movie = data;
+        }
+      );
     });
     this.currentUser = this.authService.user();
   }
@@ -40,8 +48,15 @@ export class RateMoviePage implements OnInit {
       review: this.review,
       date: new Date()
     };
-    this.movieService.addReview(this.index, newReview);
-    this.router.navigate(['/movie-detail', this.index]);
+    // this.movieService.addReview(this.index, newReview);
+    // this.router.navigate(['/movie-detail', this.index]);
+    this.movieService.addReview(this.id, newReview).subscribe((response: any)=>{
+      if(response.result==='success'){
+        this.router.navigate(['/movie-detail', this.id]);
+      }else{
+        alert(response.message)
+      }
+    });
   }
 }
 

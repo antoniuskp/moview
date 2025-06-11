@@ -1,12 +1,12 @@
-import {Component, ElementRef, QueryList, ViewChildren} from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { AuthService } from "../services/authentication/auth.service";
 import { Router } from "@angular/router";
-import {animate, style, transition, trigger} from "@angular/animations";
-import {IMoview} from "../interfaces/movie";
-import {MovieService} from "../services/movie.service";
+import { animate, style, transition, trigger } from "@angular/animations";
+import { IMoview } from "../interfaces/movie";
+import { MovieService } from "../services/movie.service";
 
 import Swiper from 'swiper';
-import {IReview} from "../interfaces/review";
+import { IReview } from "../interfaces/review";
 
 @Component({
   selector: 'app-home',
@@ -27,7 +27,8 @@ import {IReview} from "../interfaces/review";
 })
 export class HomePage {
 
-  movies: IMoview[] = []
+  // movies: IMoview[] = []
+  movies: any[] = []
 
   constructor(
     private authService: AuthService,
@@ -36,9 +37,16 @@ export class HomePage {
   ) { }
 
   ngOnInit() {
-    this.movies = this.movieService.movies
-      .sort((a, b) => new Date(b.tanggalRilis).getTime() - new Date(a.tanggalRilis).getTime())
-      .slice(0, 10);
+    // this.movies = this.movieService.movies
+    //   .sort((a, b) => new Date(b.tanggalRilis).getTime() - new Date(a.tanggalRilis).getTime())
+    //   .slice(0, 10);
+    this.movieService.movies().subscribe(
+      (data) => {
+        this.movies = this.movieService.parseMovies(data);
+        this.movies.sort((a, b) => new Date(b.tanggalRilis).getTime() - new Date(a.tanggalRilis).getTime()).slice(0, 10);
+      }
+    );
+    
   }
 
   @ViewChildren('swiper')
@@ -48,7 +56,7 @@ export class HomePage {
   showLogout = false;
 
   logout() {
-     this.authService.logout();
+    this.authService.logout();
   }
 
   toggleLogout() {

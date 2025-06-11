@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from "../interfaces/user";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../services/authentication/auth.service";
 import { animate, style, transition, trigger } from "@angular/animations";
 
@@ -35,6 +35,7 @@ export class RegistrationPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -54,7 +55,16 @@ export class RegistrationPage implements OnInit {
   registration() {
     if (this.user.username != "" && this.user.password != "") {
       console.log("MASUK REGIST")
-      return this.authService.register(this.user);
+      // return this.authService.register(this.user);
+      this.authService.register(this.user).subscribe((response: any) => {
+        if (response.result === 'success') {
+          // alert("success")
+          this.router.navigate(['/home']);
+        }
+        else {
+          alert(response.message)
+        }
+      });
     }
     return;
   }
